@@ -4,18 +4,25 @@ author: 'Your name or organization here'
 
 # Define your inputs here.
 inputs:
-  who-to-greet:
-    description: 'Your input description here'
+  package-name:
+    description: 'Package name'
     required: true
-    default: 'World'
+    default: ""
+
+  ros-distro:
+    description: 'ROS distro'
+    required: true
+    default: "humble"
 
 # Define your outputs here.
 outputs:
-  greeting:
+  output-dir:
     description: 'Your output description here'
 
 runs:
   using: docker
   image: Dockerfile
   env:
-    INPUT_WHO_TO_GREET: ${{ inputs.who-to-greet }}
+    PACKAGE_NAME: ${{ inputs.package-name }}
+    ROS_DISTRO: ${{ inputs.ros-distro }}
+

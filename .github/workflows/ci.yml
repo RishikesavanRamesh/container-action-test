@@ -24,12 +24,18 @@ jobs:
           - 5001:5000
 
     env:
-      TEST_TAG: localhost:5001/actions/container-action:latest
+      TEST_TAG: localhost:5001/test-docker:latest
 
     steps:
       - name: Checkout
         id: checkout
         uses: actions/checkout@v4
+
+      - name: Checkout second repo
+        uses: actions/checkout@v4
+        with:
+          repository: RishikesavanRamesh/ROS2-DEV
+          path: ros2-dev
 
       - name: Setup Docker BuildX
         id: setup-buildx
@@ -44,32 +50,34 @@ jobs:
         with:
           context: .
           push: true
+          build-args: |
+            ROS_DISTRO:"${{ env.ROS_DISTRO }}"
+            PACKAGE_NAME:"${{ env.PACKAGE_NAME }}"
           tags: ${{ env.TEST_TAG }}
 
       - name: Run the Container
         id: run
         env:
-          INPUT_WHO_TO_GREET: Mona Lisa Octocat
+          PACKAGE_NAME: Mona Lisa Octocat
         run: |
           docker run \
-            --env INPUT_WHO_TO_GREET="${{ env.INPUT_WHO_TO_GREET }}" \
             --rm ${{ env.TEST_TAG }}
 
-  test-action:
-    name: GitHub Actions Test
-    runs-on: ubuntu-latest
+  # test-action:
+  #   name: GitHub Actions Test
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout
-        id: checkout
-        uses: actions/checkout@v4
+  #   steps:
+  #     - name: Checkout
+  #       id: checkout
+  #       uses: actions/checkout@v4
 
-      - name: Test Local Action
-        id: test-action
-        uses: ./
-        with:
-          who-to-greet: Mona Lisa Octocat
+  #     - name: Test Local Action
+  #       id: test-action
+  #       uses: ./
+  #       with:
+  #         who-to-greet: Mona Lisa Octocat
 
-      - name: Print Output
-        id: output
-        run: echo "${{ steps.test-action.outputs.greeting }}"
+  #     - name: Print Output
+  #       id: output
+  #       run: echo "${{ steps.test-action.outputs.greeting }}"
