@@ -25,6 +25,8 @@ jobs:
 
     env:
       TEST_TAG: localhost:5001/test-docker:latest
+      ROS_DISTRO: jazzy
+      PACKAGE_NAME: TEST-PACKAGE 
 
     steps:
       - name: Checkout
