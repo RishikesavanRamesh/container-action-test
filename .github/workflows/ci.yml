@@ -61,7 +61,6 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Build the Container
         id: build
         uses: docker/build-push-action@v6
