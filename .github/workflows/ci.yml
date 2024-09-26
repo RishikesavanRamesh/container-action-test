@@ -18,7 +18,7 @@ jobs:
     continue-on-error: true
     strategy:
       matrix:
-        ROS_DISTRO:
+        ros-distro:
           - humble
           - iron
           - jazzy
@@ -32,7 +32,7 @@ jobs:
 
     env:
       TEST_TAG: localhost:5001/test-docker:latest
-      ROS_DISTRO: ${{ matrix.features }}
+      ROS_DISTRO: ${{ matrix.ros-distro }}
       PACKAGE_NAME: TEST-PACKAGE 
 
     steps:
