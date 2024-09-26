@@ -21,7 +21,10 @@ jobs:
         ros-distro:
           - humble
           - iron
-          - jazzy
+        package:
+          - test1.d
+          - test2.d
+          - test3.d
 
     # Run a local registry to push to
     services:
@@ -33,7 +36,7 @@ jobs:
     env:
       TEST_TAG: localhost:5001/test-docker:latest
       ROS_DISTRO: ${{ matrix.ros-distro }}
-      PACKAGE_NAME: TEST-PACKAGE 
+      PACKAGE_NAME:  ${{ matrix.package }}
 
     steps:
       - name: Checkout

@@ -11,7 +11,7 @@ ARG PACKAGE_NAME
 WORKDIR /usr/src
 
 # Copy any source file(s) required for the action
-COPY ./ros2-dev/* ./ros2-dev/.
+COPY ./test-folder/${PACKAGE_NAME} ./${PACKAGE_NAME}
 
 # Copy any source file(s) required for the action
 COPY entrypoint.sh .
