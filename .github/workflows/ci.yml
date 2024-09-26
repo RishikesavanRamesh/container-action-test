@@ -15,6 +15,13 @@ jobs:
   test-docker:
     name: Docker Tests
     runs-on: ubuntu-latest
+    continue-on-error: true
+    strategy:
+      matrix:
+        ROS_DISTRO:
+          - humble
+          - iron
+          - jazzy
 
     # Run a local registry to push to
     services:
@@ -25,7 +32,7 @@ jobs:
 
     env:
       TEST_TAG: localhost:5001/test-docker:latest
-      ROS_DISTRO: jazzy
+      ROS_DISTRO: ${{ matrix.features }}
       PACKAGE_NAME: TEST-PACKAGE 
 
     steps:
