@@ -23,8 +23,6 @@ jobs:
           - iron
         package:
           - test1.d
-          - test2.d
-          - test3.d
 
     # Run a local registry to push to
     services:
@@ -46,8 +44,9 @@ jobs:
       - name: Checkout second repo
         uses: actions/checkout@v4
         with:
-          repository: RishikesavanRamesh/ROS2-DEV
-          path: ros2-dev
+          repository: ros2/demos
+          ref: ${{ env.ROS_DISTRO }}
+          path: test-folder/test1.d
 
       - name: Setup Docker BuildX
         id: setup-buildx
