@@ -51,8 +51,8 @@ jobs:
           context: .
           push: true
           build-args: |
-            ROS_DISTRO:"${{ env.ROS_DISTRO }}"
-            PACKAGE_NAME:"${{ env.PACKAGE_NAME }}"
+            ROS_DISTRO=${{ env.ROS_DISTRO }}
+            PACKAGE_NAME=${{ env.PACKAGE_NAME }}
           tags: ${{ env.TEST_TAG }}
 
       - name: Run the Container
